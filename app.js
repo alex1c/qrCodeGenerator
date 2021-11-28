@@ -25,6 +25,7 @@ colors.forEach(function (color) {
     event.preventDefault();
     document.getElementById("qrcode").innerHTML = "";
     makeCode();
+    addSavePicturEvent()
     addFooter();
   });
 
@@ -38,6 +39,7 @@ sizeBlock.addEventListener("click", (event) => {
   event.preventDefault();
   document.getElementById("qrcode").innerHTML = "";
   makeCode();
+  addSavePicturEvent();
   addFooter();
 });
 
@@ -48,6 +50,7 @@ inputTextArea.addEventListener("blur", (event) => {
   event.preventDefault();
   document.getElementById("qrcode").innerHTML = "";
   makeCode();
+  addSavePicturEvent()
   addFooter();
 });
 
@@ -59,6 +62,7 @@ inputTextArea.addEventListener("keydown", (event) => {
     event.preventDefault();
     document.getElementById("qrcode").innerHTML = "";
     makeCode();
+    addSavePicturEvent()
     addFooter();
   }
 });
@@ -132,3 +136,16 @@ function addFooter() {
 }
 
 addFooter();
+
+function addSavePicturEvent() {
+  const imgQrCode = document.querySelector("img");
+  imgQrCode.addEventListener("click", (event) => {
+    const base64URL = imgQrCode.src;
+    var win = window.open();
+    win.document.write(
+      '<iframe src="' +
+        base64URL +
+        '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>'
+    );
+  });
+}
