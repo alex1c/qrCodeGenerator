@@ -60,13 +60,13 @@ Global Styles
 ===============
 */
 
-*,
+/* *,
 ::after,
 ::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 body {
   font-family: var(--ff-secondary);
   background: var(--clr-grey-10);
@@ -83,9 +83,9 @@ a {
 /* img:not(.logo) {
   width: 100%;
 } */
-img {
+/* img {
   display: block;
-}
+} */
 
 h1,
 h2,
@@ -315,3 +315,19 @@ Countdown Timer
   .custom-dropdown::after {
     color: rgba(0,0,0,.4);
   }
+
+  .my-flex-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 100px;
+   }
+   .my-flex-box {
+    margin: 5px;
+    padding: 5px;
+    flex: 1 1 auto;
+    align-self: center;
+   }
+
+   
