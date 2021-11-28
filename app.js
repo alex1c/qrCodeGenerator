@@ -15,16 +15,17 @@ let currentColor = "#0000CD";
 colors.forEach(function (color) {
   itemColor = document.createElement("div");
   itemColor.classList.add("dquare");
-  itemColor.classList.add('my-flex-box')
+  itemColor.classList.add("my-flex-box");
   itemColor.style.backgroundColor = "#" + color;
-  itemColor.style.color = "rgba(255,228,181)"
-  itemColor.innerHTML = "#" +color;
+  itemColor.style.color = "rgba(255,228,181)";
+  itemColor.innerHTML = "#" + color;
   itemColor.addEventListener("click", (event) => {
     console.log(event.target.style.backgroundColor);
     currentColor = event.target.style.backgroundColor;
     event.preventDefault();
     document.getElementById("qrcode").innerHTML = "";
     makeCode();
+    addFooter();
   });
 
   colorBlock.append(itemColor);
@@ -37,37 +38,35 @@ sizeBlock.addEventListener("click", (event) => {
   event.preventDefault();
   document.getElementById("qrcode").innerHTML = "";
   makeCode();
+  addFooter();
 });
 
-const inputTextArea = document.querySelector('#text')
+const inputTextArea = document.querySelector("#text");
 inputTextArea.addEventListener("blur", (event) => {
-    //console.log(event.target.style.backgroundColor);
-    // currentColor = event.target.style.backgroundColor
+  //console.log(event.target.style.backgroundColor);
+  // currentColor = event.target.style.backgroundColor
+  event.preventDefault();
+  document.getElementById("qrcode").innerHTML = "";
+  makeCode();
+  addFooter();
+});
+
+//const inputTextArea = document.querySelector('#text')
+inputTextArea.addEventListener("keydown", (event) => {
+  //console.log(event.target.style.backgroundColor);
+  // currentColor = event.target.style.backgroundColor
+  if (event.keyCode == 13) {
     event.preventDefault();
     document.getElementById("qrcode").innerHTML = "";
     makeCode();
-  });
+    addFooter();
+  }
+});
 
-  //const inputTextArea = document.querySelector('#text')
-inputTextArea.addEventListener("keydown", (event) => {
-    //console.log(event.target.style.backgroundColor);
-    // currentColor = event.target.style.backgroundColor
-    if (event.keyCode == 13) {
-        event.preventDefault();
-        document.getElementById("qrcode").innerHTML = "";
-        makeCode();
-    }
-   
-  });
-
-/*
- * Original version at
- * http://red-team-design.com/making-html-dropdowns-not-suck
- */
 function getCurrentWidth() {
   const width = document.querySelector(".custom-dropdown-option");
 
-  console.log(width.options.selectedIndex);
+  //console.log(width.options.selectedIndex);
 
   if (width.options.selectedIndex == 0) {
     widthValue = 100;
@@ -109,7 +108,7 @@ function makeCode() {
     height: widthValue,
     colorDark: currentColor, //"#FF4500",
     colorLight: "#ffffff",
-    text: "rrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    //text: "rrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
     correctLevel: QRCode.CorrectLevel.H,
   });
 
@@ -118,12 +117,18 @@ function makeCode() {
 
 makeCode();
 
-// $("#text")
-//   .on("blur", function () {
-//     makeCode();
-//   })
-//   .on("keydown", function (e) {
-//     if (e.keyCode == 13) {
-//       makeCode();
-//     }
-//   });
+function addFooter() {
+  const qrCodeBlock = document.getElementById("qrcode");
+
+  const footerBlock = document.createElement("footer");
+  footerBlock.classList.add("pt-3");
+  footerBlock.classList.add("mt-4");
+  footerBlock.classList.add("text-muted");
+  footerBlock.classList.add("border-top");
+
+  footerBlock.innerHTML = `&copy; 2021`;
+
+  qrCodeBlock.append(footerBlock);
+}
+
+addFooter();
